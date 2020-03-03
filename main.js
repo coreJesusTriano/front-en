@@ -24,7 +24,7 @@ const cliente1 = {
   id_gestor: 2,
   usuario: 'cliente1',
   password: 'cliente1',
-  correo: 'cliente1@gmail.com'
+  correo: 'cliente1@gmail.com',
   saldo: 3000
 };
 const cliente2 = {
@@ -32,7 +32,7 @@ const cliente2 = {
   id_gestor: 1,
   usuario: 'cliente2',
   password: 'cliente2',
-  correo: 'cliente2@gmail.com'
+  correo: 'cliente2@gmail.com',
   saldo: 5000
 };
 const cliente3 = {
@@ -40,6 +40,79 @@ const cliente3 = {
   id_gestor: 2,
   usuario: 'client31',
   password: 'cliente3',
-  correo: 'cliente3@gmail.com'
+  correo: 'cliente3@gmail.com',
   saldo: 1000
 };
+
+/*
+Tema 8
+Ejercicio proyecto: escribe un programa que almacene los objetos creados en el ejercio anterior del proyecto dentro de un array (un array por cada modelo de datos). A continuación, recorre cada uno de los arrays y muestra todas propiedades.
+*/
+
+// agrego los gestores al array de gestores
+const gestores = [];
+gestores.push(gestor1, gestor2, gestor3);
+// console.log(gestores);
+
+// agrego los clientes al array de clientes
+const clientes = [cliente1, cliente2, cliente3];
+// console.log(clientes);
+
+/** 
+ * DEFINICIÓN FUNCIÓN
+ * Esta función recibe como parámetro el id de un gestor y devuelve el nombre de usuario del gestor
+ * */ 
+const obtenerGestorUsuario = (id_gestor) => {
+  for (const gestor of gestores) {
+    if(gestor.id === id_gestor) {
+      return gestor.usuario
+    }
+  }
+  return 'desconocido';
+};
+
+
+console.log('GESTORES');
+
+for (const gestor of gestores) {
+  console.log(`Id: ${gestor.id}`);
+  console.log(`Usuario: ${gestor.usuario}`);
+  console.log(`Password: ${gestor.password}`);
+  console.log(`Correo: ${gestor.correo}`);
+  console.log(`---------`);
+}
+
+console.log('CLIENTES');
+
+for (const cliente of clientes) {
+  
+  const usuarioGestor = obtenerGestorUsuario(cliente.id_gestor);
+
+  console.log(`Id: ${cliente.id}`);
+  console.log(`Id gestor: ${cliente.id_gestor}`);
+  console.log(`Usuario gestor: ${usuarioGestor}`);
+  console.log(`Usuario: ${cliente.usuario}`);
+  console.log(`Password: ${cliente.password}`);
+  console.log(`Correo: ${cliente.correo}`);
+  console.log(`Saldo: ${cliente.saldo}`);
+  console.log(`---------`);
+}
+
+
+// agregar los mensajes al array mensajes
+const mensajes = [
+  {
+    id: 1,
+    id_origen: 1,
+    id_destino: 2,
+    texto: 'hola',
+    fecha: new Date()
+  },
+  {
+    id: 2,
+    id_origen: 2,
+    id_destino: 1,
+    texto: 'adios',
+    fecha: new Date()
+  }
+];
