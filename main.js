@@ -1,3 +1,6 @@
+/*
+Ejercicio proyecto: escribe un programa que declare 3 objetos de cada modelo de datos considerado: gestor, cliente, mensaje y transferencia. Los valores de las propiedades de los objetos pueden ser arbitrarios.
+*/
 // objetos gestores
 const gestor1 = {
   id: 1,
@@ -37,7 +40,7 @@ const cliente2 = {
 };
 const cliente3 = {
   id: 3,
-  id_gestor: 2,
+  id_gestor: 3,
   usuario: 'client31',
   password: 'cliente3',
   correo: 'cliente3@gmail.com',
@@ -65,7 +68,7 @@ const clientes = [cliente1, cliente2, cliente3];
 const obtenerGestorUsuario = (id_gestor) => {
   for (const gestor of gestores) {
     if(gestor.id === id_gestor) {
-      return gestor.usuario
+      return gestor.usuario;
     }
   }
   return 'desconocido';
@@ -82,7 +85,7 @@ for (const gestor of gestores) {
   console.log(`---------`);
 }
 
-console.log('CLIENTES');
+console.log('\nCLIENTES');
 
 for (const cliente of clientes) {
   
@@ -98,7 +101,6 @@ for (const cliente of clientes) {
   console.log(`---------`);
 }
 
-
 // agregar los mensajes al array mensajes
 const mensajes = [
   {
@@ -112,7 +114,32 @@ const mensajes = [
     id: 2,
     id_origen: 2,
     id_destino: 1,
-    texto: 'adios',
+    texto: 'adiós',
     fecha: new Date()
   }
 ];
+
+/*
+ Ejercicio proyecto: escribe un programa que realice la conversión a JSON del array (y viceversa) creado en el ejercicio anterior del proyecto.
+ */
+
+ // de array JavaScript a array JSON (string)
+ const myArrayJsonGestores = JSON.stringify(gestores, null, 3);
+ console.log(myArrayJsonGestores);
+ 
+// de objeto JavaScript a objeto JSON (string)
+ const myJsonGestor = JSON.stringify(gestor1);
+ console.log(myJsonGestor);
+ 
+
+// de array JSON (string) a array JavaScript
+ const arrayGestores = JSON.parse(myArrayJsonGestores);
+ console.log(arrayGestores);
+ 
+// de objeto JSON (string) a objeto JavaScript
+ const objGestor = JSON.parse(myJsonGestor);
+ console.log(objGestor);
+ 
+
+
+
