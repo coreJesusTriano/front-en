@@ -1,3 +1,5 @@
+// Todo lo hecho hasta ahora lo envuelvo en una función para que no se ejecute.
+function init() {
 /*
 Ejercicio proyecto: escribe un programa que declare 3 objetos de cada modelo de datos considerado: gestor, cliente, mensaje y transferencia. Los valores de las propiedades de los objetos pueden ser arbitrarios.
 */
@@ -139,7 +141,98 @@ const mensajes = [
 // de objeto JSON (string) a objeto JavaScript
  const objGestor = JSON.parse(myJsonGestor);
  console.log(objGestor);
- 
+} // fin de la función inic()
+
+/*
+Ejercicio proyecto final 1: escribir un programa que haga uso del servicio web del banco y realice una petición con AJAX a la url: http://localhost:8085/ok
+*/
+function ejercicioOk(div){
+const opciones = {
+  url: 'http://localhost:8085/ok',
+  metodoHTTP: 'GET'
+}
+
+// const callback = () => {};
+// function http(opciones, callback);
+http(opciones, (err, response)=>{
+  // Si hay error termina mostrando error en consola
+  if(err) return console.log(err); 
+
+  // Si la ejecución ha llegado a esta línea es que la petición se ha efectuado correctamente
+  console.log(response);
+  //document.write(`El servidor responde : ${response}`);
+  const mensa = `El servidor responde : <br> <p>${response}</p>`;
+  document.getElementById('msg').innerHTML=mensa;
+});
+}
+function ExeEjercicioOk(){
+  let mensage ='Iniciando ejecución ...';
+  document.getElementById('msg').innerHTML=mensage;
+  //document.write('Iniciando ejecución ...');
+  console.log('Iniciando ejecución ...');
+  mensage = 'accediendo al servicio web ...';
+  setTimeout(() => {
+    //document.write('accediendo al servicio web ...\n');
+    console.log('accediendo al servicio web ...');
+    document.getElementById('msg').innerHTML=mensage;
+    ('msg').innerHTML=mensage;
+  }, 2000);
+  setTimeout(() => {
+    ejercicioOk('msg');
+  }, 3000);
+}
+/*
+Ejercicio proyecto final 2: implementar el método login para los gestores (http://localhost:8085/login/gestor/) y almacenar el token devuelto en una variable.
+*/
+function EjercicioLogin() {
+  const opcionesLogin = {
+    url: 'http://localhost:8085/login/gestor/',
+    metodoHTTP: 'POST',
+    cabeceras: {
+      "Content-Type": 'application/x-www-form-urlencoded'
+    },
+    json: true, // Para que lo devuelva como objeto JSON
+    body: 'usuario=gestor1&password=gestor1'
+  };
 
 
+  http(opcionesLogin, (err, response)=>{
+    if(err) return console.log(err);
+    if(!response.ok) return console.log(response.msg);
+    
+    // guardo token en una variable
+    const token = response.data.token;
+    
+    const opcionesObtenerGestores = {
+      url: 'http://localhost:8085/gestores/',
+      metodoHTTP: 'GET',
+      cabeceras: {
+        Authorization: `Basic ${token}`
+      },
+      json: true
+    }
+    
+    http(opcionesObtenerGestores, (err, response)=>{
+      if(err) return console.log(err);
+      console.log(response);
+      if(!response.ok) return console.log(response.msg);
+      const gestores = response.data;
+      console.log(gestores);
+      
+      console.log('GESTORES');
 
+      for (const gestor of gestores) {
+        console.log(`Id: ${gestor.id}`);
+        console.log(`Usuario: ${gestor.usuario}`);
+        console.log(`Password: ${gestor.password}`);
+        console.log(`Correo: ${gestor.correo}`);
+        console.log(`---------`);
+      }
+
+    });
+  });
+
+}
+// COMIENZO EJECUCIÓN SCRIPT
+//ExeEjercicioOk();
+EjercicioLogin();
