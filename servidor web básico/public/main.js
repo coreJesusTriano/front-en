@@ -15,7 +15,17 @@ function mostrarGestoresConsola(gestores) {
     console.log(`---------`);
   });
 }
+// obtenerGestorUsuario se usará en mostrarClientesConsola
+const obtenerGestorUsuario = (id_gestor) => {
+  for (const gestor of gestores) {
+    if(gestor.id === id_gestor) {
+      return gestor.usuario;
+    }
+  }
+  return 'desconocido';
+};
 
+// usa obtenerGestorUsuario
 function mostrarClientesConsola(clientes) {
   console.log('========\nCLIENTES\n========\n');
   for (const cliente of clientes) {
@@ -32,15 +42,6 @@ function mostrarClientesConsola(clientes) {
     console.log(`---------`);
   }  
 }
-
-const obtenerGestorUsuario = (id_gestor) => {
-  for (const gestor of gestores) {
-    if(gestor.id === id_gestor) {
-      return gestor.usuario;
-    }
-  }
-  return 'desconocido';
-};
 
 // COMIENZO EJECUCIÓN SCRIPT
 
