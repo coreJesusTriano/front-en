@@ -8,12 +8,12 @@
 // declaración funciones de utilidad
 function mostrarGestoresConsola(gestores) {
   console.log('========\nGESTORES\n========\n');
-  for (const gestor of gestores) {
+  gestores.forEach(gestor => {
     console.log(`Id: ${gestor.id}`);
     console.log(`Usuario: ${gestor.usuario}`);
     console.log(`Correo: ${gestor.correo}`);
     console.log(`---------`);
-  }
+  });
 }
 
 function mostrarClientesConsola(clientes) {
