@@ -2,6 +2,8 @@
 const SERVER ='http://localhost:8085';
 const URL_OK = `${SERVER}/ok`;
 const URL_LOGIN_GESTOR = `${SERVER}/login/gestor/`;
+const URL_GESTORES = `${SERVER}/gestores/`;
+
 
 // declaración de la función ok
 // function ok(callback(err,datos)) 
