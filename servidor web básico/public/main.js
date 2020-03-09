@@ -85,6 +85,7 @@ banco.obtenerGestorPorId('1', (err, gestor)=>{
   mostrarGestoresConsola([gestor]);
 });
 }
+function initPromesas(){
 console.log('\n################\n');
 
 const bancoPromise = new BancoPromise();
@@ -108,6 +109,7 @@ promise.then((response)=>{
 //bancoPromise.loginGestor().then(()=>{}).catch(()=>{});
 const usuario = 'gestor1';
 const password = 'gestor1';
+
 bancoPromise.loginGestor(usuario, password)
 
 .then(()=>{
@@ -120,9 +122,29 @@ bancoPromise.loginGestor(usuario, password)
 .catch((err)=>{  // capturo todos los errores
     console.log('Hubo un error');
     console.log(err);
-});
+  });
+}
+const usuario = 'gestor1';
+const password = 'gestor1';
 
+async function funcionAsincrona(){
+
+  try {
+  const bancoPromise = new BancoPromise();
+  // await para la ejecución a que se resuelva la promesa o se rechace
+  await bancoPromise.loginGestor(usuario, password);
+  
+  // ya estoy autenticado
+  const gestores = await bancoPromise.obtenerGestores();
+  mostrarGestoresConsola(gestores);
+  }
+  // si alguna promesa es rechazada en el try, capturo el error aquí
+  catch (err) {
+    console.log(err);
+  }
+}
+
+funcionAsincrona();
 
 console.log('Sigo ejecutando código');
-
 
