@@ -131,8 +131,14 @@ async function funcionAsincrona(){
 
   try {
   const bancoPromise = new BancoPromise();
+
+  const response = await bancoPromise.ok();
+  console.log(response);
+  
   // await para la ejecución a que se resuelva la promesa o se rechace
   await bancoPromise.loginGestor(usuario, password);
+  console.log('Ya esto autenticado.');
+  
   
   // ya estoy autenticado
   const gestores = await bancoPromise.obtenerGestores();
