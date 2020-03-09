@@ -108,24 +108,20 @@ promise.then((response)=>{
 //bancoPromise.loginGestor().then(()=>{}).catch(()=>{});
 const usuario = 'gestor1';
 const password = 'gestor1';
-bancoPromise.loginGestor(usuario, password).then(()=>{
-  console.log('Ya estoy autenticado');
+bancoPromise.loginGestor(usuario, password)
 
-  // Una vez autenticado, obtengo los gestores
-  //bancoPromise.obtenerGestores.then().catch();
-  bancoPromise.obtenerGestores().then((gestores)=>{
-
+.then(()=>{
+  console.log('Ya estoy autenticado, y retorno la siguiente promesa');
+  return bancoPromise.obtenerGestores(); // para poder encadenar promesas sin infierno
+  })
+.then((gestores)=>{
     mostrarGestoresConsola(gestores);
-
-  }).catch((err)=>{
-    console.log('Hubo un error obteniendo gestores');
+  })
+.catch((err)=>{  // capturo todos los errores
+    console.log('Hubo un error');
     console.log(err);
-  });
-
-}).catch((err)=>{
-  console.log('No estoy autenticado, hubo un error');
-  console.log(err);
 });
+
 
 console.log('Sigo ejecutando código');
 
