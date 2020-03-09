@@ -46,8 +46,9 @@ class BancoPromise {
   }
 
   // declaración de la método loginGestor
-  loginGestor(usuario, password, callback) {
-
+  loginGestor(usuario, password) {
+    // retornamos la promesa( ()=>{} );
+    return new Promise((resolve, reject) => {
     const opcionesLogin = {
       url: URL_LOGIN_GESTOR,
       metodoHTTP: 'POST',
@@ -59,34 +60,38 @@ class BancoPromise {
     };
     // http(opciones, callback(err, response));
     http(opcionesLogin, (err, response)=>{
-      if(err) return callback(err);
-      if(!response.ok) return callback(response.msg);
+      if(err) reject(err);
+      if(!response.ok) reject(response.msg);
       // si todo fue correcto
       // guardo token en el localStorage del navegador, que es una db key:value
       localStorage.setItem('token', response.data.token);
   
-      callback(null); // o callback();
+      resolve(); // terminamos correctamente;
     });
+  });
   } // fin método loginGestor
 
   // declaración del método obtenerGestores
-  obtenerGestores(callback) {
+  obtenerGestores() {
 
-    const opcionesObtenerGestores = {
-      url: URL_GESTORES,
-      metodoHTTP: 'GET',
-      cabeceras: {
-        Authorization: `Basic ${localStorage.getItem('token')}`
-      },
-      json: true
-    }
-  
-    http(opcionesObtenerGestores, (err, response)=>{
-      if(err) return callback(err);
-      if(!response.ok) return callback(response.msg);
-      // la respuesta que me ha llegado es correcta
-      callback(null, response.data);
-      });
+    return new Promise((resolve, reject)=>{
+
+      const opcionesObtenerGestores = {
+        url: URL_GESTORES,
+        metodoHTTP: 'GET',
+        cabeceras: {
+          Authorization: `Basic ${localStorage.getItem('token')}`
+        },
+        json: true
+      }
+    
+      http(opcionesObtenerGestores, (err, response)=>{
+        if(err) reject(err); // ejecto el error
+        if(!response.ok) reject(response.msg); // ejecto el error
+        // la respuesta que me ha llegado es correcta
+        resolve(response.data); // ejecto la re-solución
+        });
+    });
   
   } // fin obtenerGestores
 

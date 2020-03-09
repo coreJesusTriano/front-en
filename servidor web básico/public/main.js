@@ -94,7 +94,7 @@ const promise = bancoPromise.ok();
 //promise.then().catch();
 //promise.then(()=>{}).catch(()=>{});
 promise.then((response)=>{
-
+  
   console.log('Se ha ejecutado el callback del then');
   console.log(response);
   
@@ -103,6 +103,16 @@ promise.then((response)=>{
   console.log('Se ha ejecutado el callback del catch');
   console.log(err);
   
+});
+
+//bancoPromise.loginGestor().then(()=>{}).catch(()=>{});
+const usuario = 'gestor1';
+const password = 'gestor1';
+bancoPromise.loginGestor(usuario, password).then(()=>{
+  console.log('Ya estoy autenticado');
+}).catch((err)=>{
+  console.log('No estoy autenticado, hubo un error');
+  console.log(err);
 });
 
 console.log('Sigo ejecutando código');
