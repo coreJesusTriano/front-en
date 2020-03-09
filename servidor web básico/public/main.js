@@ -110,6 +110,18 @@ const usuario = 'gestor1';
 const password = 'gestor1';
 bancoPromise.loginGestor(usuario, password).then(()=>{
   console.log('Ya estoy autenticado');
+
+  // Una vez autenticado, obtengo los gestores
+  //bancoPromise.obtenerGestores.then().catch();
+  bancoPromise.obtenerGestores().then((gestores)=>{
+
+    mostrarGestoresConsola(gestores);
+
+  }).catch((err)=>{
+    console.log('Hubo un error obteniendo gestores');
+    console.log(err);
+  });
+
 }).catch((err)=>{
   console.log('No estoy autenticado, hubo un error');
   console.log(err);
