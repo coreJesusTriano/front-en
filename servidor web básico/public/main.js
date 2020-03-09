@@ -127,7 +127,8 @@ bancoPromise.loginGestor(usuario, password)
 const usuario = 'gestor1';
 const password = 'gestor1';
 
-async function funcionAsincrona(){
+// Ahora es una función autoejecutable
+(async function (){ // ya no hace falta nombre, porque no se invocará más
 
   try {
   const bancoPromise = new BancoPromise();
@@ -148,9 +149,9 @@ async function funcionAsincrona(){
   catch (err) {
     console.log(err);
   }
-}
+})(); // rodeando todo el cuerpo de la función entre paréntesis y colocando los paréntesis a continuación y el ; se comvierte en una función auto ejecutable.
+//funcionAsincrona(); sustituye a esta invocación
 
-funcionAsincrona();
 
 console.log('Sigo ejecutando código');
 
