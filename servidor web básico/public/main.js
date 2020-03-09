@@ -45,9 +45,12 @@ function mostrarClientesConsola(clientes) {
 
 // COMIENZO EJECUCIÓN SCRIPT
 
+const banco = new Banco();
+console.log(banco);
+
 // Invocación a la función ok
 // ok(callback);
-ok((err, datos)=>{
+banco.ok((err, datos)=>{
   if (err) return console.log(err);
   console.log(datos);
 });
@@ -56,7 +59,7 @@ ok((err, datos)=>{
 // loginGestor(usuario, password, callback);
 const usuario = 'gestor1';
 const password = 'gestor1';
-loginGestor(usuario, password, (err)=>{
+banco.loginGestor(usuario, password, (err)=>{
   if(err) {
     // no estoy autenticado
     return console.log(err);
@@ -67,7 +70,7 @@ loginGestor(usuario, password, (err)=>{
 
 // Invocación a la función obtenerGestores
 // obtenerGestores(callback);
-obtenerGestores((err, gestores)=>{
+banco.obtenerGestores((err, gestores)=>{
   if (err) return console.log(err);
   // tengo el array de gestores
   mostrarGestoresConsola(gestores);
@@ -75,7 +78,7 @@ obtenerGestores((err, gestores)=>{
 
 // Invocación a la función obtenerGestorPorId
 // obtenerGestorPorId(id_gestor, callback);
-obtenerGestorPorId('1', (err, gestor)=>{
+banco.obtenerGestorPorId('1', (err, gestor)=>{
   if (err) return console.log(err);
   // He obtenido el gestor
   mostrarGestoresConsola([gestor]);
