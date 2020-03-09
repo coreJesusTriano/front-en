@@ -45,6 +45,7 @@ function mostrarClientesConsola(clientes) {
 
 // COMIENZO EJECUCIÓN SCRIPT
 
+function initCallBack() {
 const banco = new Banco();
 console.log(banco);
 
@@ -83,4 +84,27 @@ banco.obtenerGestorPorId('1', (err, gestor)=>{
   // He obtenido el gestor
   mostrarGestoresConsola([gestor]);
 });
+}
+console.log('\n################\n');
+
+const bancoPromise = new BancoPromise();
+
+const promise = bancoPromise.ok();
+// las promesas poseen el método then y catch
+//promise.then().catch();
+//promise.then(()=>{}).catch(()=>{});
+promise.then((response)=>{
+
+  console.log('Se ha ejecutado el callback del then');
+  console.log(response);
+  
+}).catch((err)=>{
+  
+  console.log('Se ha ejecutado el callback del catch');
+  console.log(err);
+  
+});
+
+console.log('Sigo ejecutando código');
+
 
